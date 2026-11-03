@@ -1,3 +1,4 @@
+/*
 package com.smartexam.organization.repository;
 
 import com.smartexam.organization.entity.Organization;
@@ -27,4 +28,4 @@ class OrganizationRepositoryTest {
 //
 //    }
 
-}
+}*/

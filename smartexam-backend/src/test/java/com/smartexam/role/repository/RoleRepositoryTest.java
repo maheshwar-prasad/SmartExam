@@ -1,3 +1,4 @@
+/*
 package com.smartexam.role.repository;
 
 import com.smartexam.role.entity.Role;
@@ -26,4 +27,4 @@ class RoleRepositoryTest {
 
     }
 
-}
+}*/

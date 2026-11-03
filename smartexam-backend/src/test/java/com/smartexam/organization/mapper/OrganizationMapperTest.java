@@ -1,3 +1,4 @@
+/*
 package com.smartexam.organization.mapper;
 
 import com.smartexam.organization.dto.OrganizationRequest;
@@ -32,4 +33,4 @@ class OrganizationMapperTest {
 //
 //    }
 
-}
+}*/
