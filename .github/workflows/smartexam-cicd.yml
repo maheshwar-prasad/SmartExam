@@ -10,6 +10,7 @@
       branches:
         - main
         - develop
+        - feature
 
     workflow_dispatch:
 
@@ -59,11 +60,9 @@
     frontend-build:
 
       name: Angular Build
-
       runs-on: ubuntu-latest
 
       steps:
-
         - name: Checkout Code
           uses: actions/checkout@v4
 
@@ -71,8 +70,6 @@
           uses: actions/setup-node@v4
           with:
             node-version: '22'
-            cache: npm
-            cache-dependency-path: smartexam-ui/package-lock.json
 
         - name: Install Dependencies
           working-directory: smartexam-ui
