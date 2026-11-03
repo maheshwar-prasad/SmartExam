@@ -1,0 +1,63 @@
+# Java
+*.class
+*.jar
+*.war
+
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# Spring Boot
+application-local.properties
+application-dev.properties
+.env
+
+# Angular
+node_modules/
+dist/
+.angular/
+coverage/
+
+# Uploaded files - Do not push to GitHub
+/uploads/
+/uploads/**
+
+# Backend generated files
+smartexam-backend/target/
+
+# Angular generated files
+smartexam-ui/node_modules/
+smartexam-ui/dist/
+smartexam-ui/.angular/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.bak

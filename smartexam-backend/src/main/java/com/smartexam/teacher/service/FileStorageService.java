@@ -1,0 +1,14 @@
+package com.smartexam.teacher.service;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public interface FileStorageService {
+
+    String store(
+            MultipartFile file,
+            String folder,
+            Long organizationId
+    );
+
+    void delete(String fileUrl);
+}

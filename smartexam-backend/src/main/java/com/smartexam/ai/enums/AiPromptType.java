@@ -1,0 +1,24 @@
+package com.smartexam.ai.enums;
+
+public enum AiPromptType {
+
+    GENERAL_CHAT,
+
+    QUESTION_GENERATION,
+
+    QUESTION_EXPLANATION,
+
+    EXAM_GENERATION,
+
+    STUDY_PLAN,
+
+    ANSWER_EVALUATION,
+
+    SUMMARY,
+
+    QUESTION_IMPROVEMENT,
+
+    QUESTION_VARIATION,
+
+    PERFORMANCE_ANALYSIS
+}
