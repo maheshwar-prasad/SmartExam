@@ -16,7 +16,6 @@
 
   permissions:
     contents: read
-
   jobs:
 
     # ======================================
@@ -24,13 +23,27 @@
     # ======================================
 
     backend-build-test:
-
       name: Backend Build & JUnit Tests
-
       runs-on: ubuntu-latest
-
+      # Temporary MySQL database for CI testing
+      services:
+        mysql:
+          image: mysql:8.4
+          env:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: smart_exam
+          ports:
+            - 3306:3306
+          options: >-
+            --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=10
+      env:
+        SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/smart_exam?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: root
       steps:
-
         - name: Checkout Code
           uses: actions/checkout@v4
 
@@ -38,12 +51,21 @@
           uses: actions/setup-java@v4
           with:
             distribution: temurin
-            java-version: '25'
+            java-version: '21'
             cache: maven
 
-        - name: Build Backend and Run Tests
+        - name: Verify Java Version
+          run: java -version
+
+        - name: Verify MySQL Connection
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y mysql-client
+            mysqladmin ping -h 127.0.0.1 -uroot -proot
+
+        - name: Build Backend and Run JUnit Tests
           working-directory: smartexam-backend
-          run: mvn clean verify
+          run: mvn -B clean verify
 
         - name: Upload JUnit Reports
           if: always()
@@ -61,7 +83,8 @@
 
       name: Angular Build
       runs-on: ubuntu-latest
-
+      needs:
+        - backend-build-test
       steps:
         - name: Checkout Code
           uses: actions/checkout@v4
@@ -86,11 +109,11 @@
     security-check:
 
       name: Security Scan
-
       runs-on: ubuntu-latest
-
+      needs:
+        - backend-build-test
+        - frontend-build
       steps:
-
         - name: Checkout Code
           uses: actions/checkout@v4
 
@@ -131,11 +154,8 @@
     # ======================================
 
     docker-build:
-
       name: Docker Image Build
-
       runs-on: ubuntu-latest
-
       needs:
         - backend-build-test
         - frontend-build
